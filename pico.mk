@@ -66,6 +66,11 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     vendor/cm/prebuilt/common/etc/apns-conf.xml:system/etc/apns-conf.xml
 
+# Themes
+PRODUCT_COPY_FILES += \
+    device/semc/shakira/prebuilt/minicm.png:system/usr/res/minicm.png \
+    device/semc/shakira/prebuilt/bootanimation.zip:system/media/bootanimation.zip
+
 # Video decoding
 PRODUCT_PACKAGES += \
     libstagefrighthw \
@@ -283,7 +288,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     dalvik.vm.lockprof.threshold=500 \
     dalvik.vm.dexopt-flags=m=y \
     ro.telephony.call_ring.multiple=false \
-    ro.vold.umsdirtyratio=20
+    ro.vold.umsdirtyratio=20 \
     persist.sys.themeId=MiniCM9 \
     persist.sys.themePackageName=com.darkdog.theme.minicm9
     

@@ -22,6 +22,50 @@
 PRODUCT_COPY_FILES += \
     device/semc/msm7x27-common/prebuilt/MiniCM9.apk:system/app/MiniCM9.apk
 
+# Extra packages
+PRODUCT_PACKAGES += \
+    FileManager \
+    screencap \
+    hostap \
+    rzscontrol \
+    CMUpdateNotify \
+    com.android.future.usb.accessory
+
+# for bugmailer
+PRODUCT_PACKAGES += send_bug
+PRODUCT_COPY_FILES += \
+        system/extras/bugmailer/bugmailer.sh:system/bin/bugmailer.sh \
+        system/extras/bugmailer/send_bug:system/bin/send_bug
+
+# for Compcache
+PRODUCT_COPY_FILES += \
+        device/semc/msm7x27-common/prebuilt/rzscontrol:system/xbin/rzscontrol
+
+# Compcache
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.service.zram=1 \
+    ro.zram.default=18
+
+# Default ringtone
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.config.ringtone=CyanTone.ogg \
+    ro.config.notification_sound=CyanMessage.ogg \
+    ro.config.alarm_alert=CyanAlarm.ogg
+
+# A2SD and extra init files
+PRODUCT_COPY_FILES += \
+    device/semc/msm7x27-common/prebuilt/a2sd:system/bin/a2sd \
+    device/semc/msm7x27-common/prebuilt/00banner:system/etc/init.d/00banner \
+    device/semc/msm7x27-common/prebuilt/10apps2sd:system/etc/init.d/10apps2sd \
+    device/semc/msm7x27-common/prebuilt/05mountext:system/etc/init.d/05mountext \
+    device/semc/msm7x27-common/prebuilt/04modules:system/etc/init.d/04modules \
+    device/semc/msm7x27-common/prebuilt/06minicm:system/etc/init.d/06minicm \
+    device/semc/msm7x27-common/prebuilt/zipalign:system/xbin/zipalign
+
+# Extra Cyanogen vendor files
+PRODUCT_COPY_FILES += \
+    vendor/cm/prebuilt/common/etc/apns-conf.xml:system/etc/apns-conf.xml
+
 # Video decoding
 PRODUCT_PACKAGES += \
     libstagefrighthw \

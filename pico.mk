@@ -18,16 +18,9 @@
 # We havent decided what props we need,yet
 # $(call inherit-product-if-exists, vendor/htc/pico/pico-vendor.mk)
 
-# Extra Ringtones
-include frameworks/base/data/sounds/AudioPackageNewWave.mk
-
 # MiniCM9 theme
 PRODUCT_COPY_FILES += \
     device/semc/msm7x27-common/prebuilt/MiniCM9.apk:system/app/MiniCM9.apk
-
-PRODUCT_PROPERTY_OVERRIDES += \
-    persist.sys.themeId=MiniCM9 \
-    persist.sys.themePackageName=com.darkdog.theme.minicm9
 
 # Video decoding
 PRODUCT_PACKAGES += \
@@ -247,6 +240,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     dalvik.vm.dexopt-flags=m=y \
     ro.telephony.call_ring.multiple=false \
     ro.vold.umsdirtyratio=20
+    persist.sys.themeId=MiniCM9 \
+    persist.sys.themePackageName=com.darkdog.theme.minicm9
     
 PRODUCT_AAPT_CONFIG := normal mdpi
 PRODUCT_AAPT_PREF_CONFIG := mdpi

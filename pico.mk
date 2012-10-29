@@ -18,9 +18,10 @@
 # We havent decided what props we need,yet
 # $(call inherit-product-if-exists, vendor/htc/pico/pico-vendor.mk)
 
-# MiniCM9 theme
+# MiniCM9 visuals
 PRODUCT_COPY_FILES += \
-    device/semc/msm7x27-common/prebuilt/MiniCM9.apk:system/app/MiniCM9.apk
+    device/semc/msm7x27-common/prebuilt/MiniCM9.apk:system/app/MiniCM9.apk \
+    device/htc/pico/prebuilt/media/bootanimation.zip:system/media/bootanimation.zip
 
 # Extra packages
 PRODUCT_PACKAGES += \
@@ -39,7 +40,7 @@ PRODUCT_COPY_FILES += \
 
 # for Compcache
 PRODUCT_COPY_FILES += \
-        device/semc/msm7x27-common/prebuilt/rzscontrol:system/xbin/rzscontrol
+        device/htc/pico/prebuilt/xbin/rzscontrol:system/xbin/rzscontrol
 
 # Compcache
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -54,22 +55,17 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # A2SD and extra init files
 PRODUCT_COPY_FILES += \
-    device/semc/msm7x27-common/prebuilt/a2sd:system/bin/a2sd \
-    device/semc/msm7x27-common/prebuilt/00banner:system/etc/init.d/00banner \
-    device/semc/msm7x27-common/prebuilt/10apps2sd:system/etc/init.d/10apps2sd \
-    device/semc/msm7x27-common/prebuilt/05mountext:system/etc/init.d/05mountext \
-    device/semc/msm7x27-common/prebuilt/04modules:system/etc/init.d/04modules \
-    device/semc/msm7x27-common/prebuilt/06minicm:system/etc/init.d/06minicm \
-    device/semc/msm7x27-common/prebuilt/zipalign:system/xbin/zipalign
+    device/htc/pico/prebuilt/bin/a2sd:system/bin/a2sd \
+    device/htc/pico/prebuilt/etc/init.d/00banner:system/etc/init.d/00banner \
+    device/htc/pico/prebuilt/etc/init.d/10apps2sd:system/etc/init.d/10apps2sd \
+    device/htc/pico/prebuilt/etc/init.d/05mountext:system/etc/init.d/05mountext \
+    device/htc/pico/prebuilt/etc/init.d/04modules:system/etc/init.d/04modules \
+    device/htc/pico/prebuilt/etc/init.d/06minicm:system/etc/init.d/06minicm \
+    device/htc/pico/prebuilt/xbin/zipalign:system/xbin/zipalign
 
 # Extra Cyanogen vendor files
 PRODUCT_COPY_FILES += \
     vendor/cm/prebuilt/common/etc/apns-conf.xml:system/etc/apns-conf.xml
-
-# Themes
-PRODUCT_COPY_FILES += \
-    device/semc/shakira/prebuilt/minicm.png:system/usr/res/minicm.png \
-    device/semc/shakira/prebuilt/bootanimation.zip:system/media/bootanimation.zip
 
 # Video decoding
 PRODUCT_PACKAGES += \

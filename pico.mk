@@ -30,7 +30,6 @@ PRODUCT_PACKAGES += \
     screencap \
     hostap \
     rzscontrol \
-    CMUpdateNotify \
     com.android.future.usb.accessory
 
 # for bugmailer

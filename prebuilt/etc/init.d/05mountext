@@ -17,8 +17,8 @@ do
     then
         # 2nd partition of sdcard should be the sd-ext if it exists
         SD_EXT_PART=/dev/block/mmcblk${MMC_NUM}p2
-        # Find the linux and swap partitions (if they exist)
         #SD_EXT_PART=`$FDISK /dev/block/mmcblk${MMC_NUM} | awk '/^\// && $5 == 83 {print $1;exit;}'`;
+        # Find the linux and swap partitions (if they exist)
         SWAP_PART=`$FDISK /dev/block/mmcblk${MMC_NUM} | awk '/^\/.* 82 Linux swap/ {print $1;exit;}'`;
         setprop ev.sdextpart $SD_EXT_PART
         break;

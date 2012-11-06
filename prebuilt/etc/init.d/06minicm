@@ -25,6 +25,7 @@ elif [ -f /system/bin/recovery.tar ]; then
 elif [ -f /system/bin/xrecovery.tar ]; then
 	RECVERSION=`/system/xbin/strings /system/bin/xrecovery.tar | /system/xbin/grep xRecovery`
 	setprop ro.recversion "$RECVERSION"
+elif	setprop ro.recversion "What do you think about this?"
 fi
 
 if [ -n "$PROP_KB" ];

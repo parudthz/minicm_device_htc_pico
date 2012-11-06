@@ -132,4 +132,7 @@ else
     $logit "$SD_EXT_DIRECTORY not mounted...nothing to do";
     setprop a2sd.mountpoint "none";
     setprop ev.filesystem.ready 0;
+else
+    setprop a2sd.mountpoint "/sd-ext";
+    setprop ev.filesystem.ready 1;
 fi;

@@ -29,8 +29,7 @@ PRODUCT_PACKAGES += \
     FileManager \
     screencap \
     hostap \
-    rzscontrol \
-    com.android.future.usb.accessory
+    rzscontrol 
 
 # for bugmailer
 PRODUCT_PACKAGES += send_bug
@@ -50,17 +49,15 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Default ringtone
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.config.ringtone=CyanTone.ogg \
-    ro.config.notification_sound=CyanMessage.ogg \
+    ro.config.notification_sound=CyanPing.ogg \
     ro.config.alarm_alert=CyanAlarm.ogg
 
 # A2SD and extra init files
 PRODUCT_COPY_FILES += \
     device/htc/pico/prebuilt/bin/a2sd:system/bin/a2sd \
     device/htc/pico/prebuilt/etc/init.d/00banner:system/etc/init.d/00banner \
-    device/htc/pico/prebuilt/etc/init.d/10apps2sd:system/etc/init.d/10apps2sd \
-    device/htc/pico/prebuilt/etc/init.d/05mountext:system/etc/init.d/05mountext \
     device/htc/pico/prebuilt/etc/init.d/04modules:system/etc/init.d/04modules \
-    device/htc/pico/prebuilt/etc/init.d/06minicm:system/etc/init.d/06minicm \
+    device/htc/pico/prebuilt/etc/init.d/40d2ext:system/etc/init.d/40d2ext \
     device/htc/pico/prebuilt/xbin/zipalign:system/xbin/zipalign
 
 # Extra Cyanogen vendor files

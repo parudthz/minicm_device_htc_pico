@@ -1,0 +1,34 @@
+#!/system/bin/sh
+#
+# mount ext partition from sd card
+# Revised 20111220 by Andrew Sutherland for apps2sd on Evervolv ICS
+# Adapted for MiniCM by nobodyAtall @ xda
+
+BB="/system/xbin/busybox";
+FDISK="$BB fdisk -l";
+E2FSCK="/system/bin/e2fsck";
+
+# find SD Card
+for MMC_NUM in `seq 0 9`;
+do
+    MMC_TYPE=`cat /sys/block/mmcblk${MMC_NUM}/device/type`
+    if [ "$MMC_TYPE" = "SD" ];
+    then
+        # Find the linux and swap partitions (if they exist)
+        SWAP_PART=`$FDISK /dev/block/mmcblk${MMC_NUM} | awk '/^\/.* 82 Linux swap/ {print $1;exit;}'`;
+        break;
+    fi;
+done
+
+# enable swap
+if [ "$SWAP_PART" = "" ];
+then
+    setprop ev.swap 0;
+    setprop ev.swappart "none";
+    log -p i -t mountext "No swap partition found.";
+else
+    $BB swapon $SWAP_PART;
+    setprop ev.swap 1;
+    setprop ev.swappart $SWAP_PART;
+    log -p i -t mountext "Swap enabled on $SWAP_PART";
+fi;

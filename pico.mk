@@ -58,7 +58,6 @@ PRODUCT_COPY_FILES += \
     device/htc/pico/prebuilt/etc/init.d/04modules:system/etc/init.d/04modules \
     device/htc/pico/prebuilt/etc/init.d/05swap:system/etc/init.d/05swap \
     device/htc/pico/prebuilt/etc/init.d/06minicm:system/etc/init.d/06minicm \
-    device/htc/pico/prebuilt/etc/init.d/40d2ext:system/etc/init.d/40d2ext \
     device/htc/pico/prebuilt/xbin/zipalign:system/xbin/zipalign
 
 # Extra Cyanogen vendor files

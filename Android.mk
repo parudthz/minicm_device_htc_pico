@@ -1,4 +1,3 @@
-#
 # Copyright (C) 2010 The Android Open Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,11 +15,5 @@
 LOCAL_PATH := $(my-dir)
 
 ifeq ($(TARGET_DEVICE),pico)
-    subdir_makefiles := \
-	 $(LOCAL_PATH)/libaudio/Android.mk \
-	 $(LOCAL_PATH)/libril/Android.mk \
-#	 $(LOCAL_PATH)/libacoustic/Android.mk \
-#	 $(LOCAL_PATH)/libcamera/Android.mk \
-#        $(LOCAL_PATH)/brcm_patchram_plus/Android.mk  
-     include $(subdir_makefiles)
+include $(call all-makefiles-under,$(LOCAL_PATH))
 endif

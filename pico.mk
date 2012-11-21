@@ -1,4 +1,3 @@
-#
 # Copyright (C) 2011 The Android Open Source Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,65 +12,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# proprietary side of the device
-# Inherit from those products. Most specific first
-
-# We havent decided what props we need,yet
-# $(call inherit-product-if-exists, vendor/htc/pico/pico-vendor.mk)
-
-# MiniCM9 visuals
-PRODUCT_COPY_FILES += \
-    device/semc/msm7x27-common/prebuilt/MiniCM9.apk:system/app/MiniCM9.apk \
-    device/htc/pico/prebuilt/media/bootanimation.zip:system/media/bootanimation.zip
-
-# Extra packages
-PRODUCT_PACKAGES += \
-    FileManager \
-    screencap \
-    hostap \
-    rzscontrol 
-
-# for bugmailer
-PRODUCT_PACKAGES += send_bug
-PRODUCT_COPY_FILES += \
-        system/extras/bugmailer/bugmailer.sh:system/bin/bugmailer.sh \
-        system/extras/bugmailer/send_bug:system/bin/send_bug
-
-# for Compcache
-PRODUCT_COPY_FILES += \
-        device/htc/pico/prebuilt/xbin/rzscontrol:system/xbin/rzscontrol
-
-# Compcache
-PRODUCT_PROPERTY_OVERRIDES += \
-    persist.service.zram=1 \
-    ro.zram.default=18
-
-# Default ringtone
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.config.ringtone=CyanTone.ogg \
-    ro.config.notification_sound=CyanPing.ogg \
-    ro.config.alarm_alert=CyanAlarm.ogg
-
-# D2EXT and extra init files
-PRODUCT_COPY_FILES += \
-    device/htc/pico/prebuilt/etc/init.d/00banner:system/etc/init.d/00banner \
-    device/htc/pico/prebuilt/etc/init.d/04modules:system/etc/init.d/04modules \
-    device/htc/pico/prebuilt/etc/init.d/05swap:system/etc/init.d/05swap \
-    device/htc/pico/prebuilt/etc/init.d/06minicm:system/etc/init.d/06minicm \
-    device/htc/pico/prebuilt/xbin/zipalign:system/xbin/zipalign
-
-# Extra Cyanogen vendor files
-PRODUCT_COPY_FILES += \
-    vendor/cm/prebuilt/common/etc/apns-conf.xml:system/etc/apns-conf.xml
+$(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 
 # Video decoding
 PRODUCT_PACKAGES += \
-    libstagefrighthw \
     libmm-omxcore \
+    libstagefrighthw \
     libOmxCore \
-    libOmxVidEnc \
-    libOmxH264Dec \
-    libOmxMpeg4Dec
     
 # Graphics 
 PRODUCT_PACKAGES += \
@@ -80,18 +27,19 @@ PRODUCT_PACKAGES += \
     hwcomposer.msm7x27a \
     libtilerenderer \
     libQcomUI
-    
+
 # Audio
 PRODUCT_PACKAGES += \
     audio.primary.msm7x27a \
-    audio_policy.msm7x27a\
+    audio_policy.msm7x27a \
     audio.a2dp.default \
+    audio_policy.conf \
     libaudioutils
 
 # Other
 PRODUCT_PACKAGES += \
     dexpreopt \
-    lights.msm7x27a \
+    lights.pico \
     sensors.msm7x27a \
     gps.pico    
     
@@ -101,25 +49,9 @@ PRODUCT_PACKAGES += \
     
 # Misc
 PRODUCT_PACKAGES += \
-    com.android.future.usb.accessory
-
-## Hardware properties 
-PRODUCT_COPY_FILES += \
-    frameworks/base/data/etc/android.hardware.camera.xml:system/etc/permissions/android.hardware.camera.xml \
-    frameworks/base/data/etc/android.hardware.location.gps.xml:system/etc/permissions/android.hardware.location.gps.xml \
-    frameworks/base/data/etc/android.hardware.location.xml:system/etc/permissions/android.hardware.location.xml \
-    frameworks/base/data/etc/android.hardware.sensor.accelerometer.xml:system/etc/permissions/android.hardware.sensor.accelerometer.xml \
-    frameworks/base/data/etc/android.hardware.sensor.compass.xml:system/etc/permissions/android.hardware.sensor.compass.xml \
-    frameworks/base/data/etc/android.hardware.sensor.light.xml:system/etc/permissions/android.hardware.sensor.light.xml \
-    frameworks/base/data/etc/android.hardware.sensor.proximity.xml:system/etc/permissions/android.hardware.sensor.proximity.xml \
-    frameworks/base/data/etc/android.hardware.telephony.gsm.xml:system/etc/permissions/android.hardware.telephony.gsm.xml \
-    frameworks/base/data/etc/android.hardware.touchscreen.multitouch.xml:system/etc/permissions/android.hardware.touchscreen.multitouch.xml \
-    frameworks/base/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
-    frameworks/base/data/etc/android.hardware.wifi.direct.xml:system/etc/permissions/android.hardware.wifi.direct.xml \
-    frameworks/base/data/etc/android.software.sip.xml:system/etc/permissions/android.software.sip.xml \
-    frameworks/base/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml \
-    frameworks/base/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml \
-    frameworks/base/data/etc/android.hardware.usb.accessory.xml:system/etc/permissions/android.hardware.usb.accessory.xml
+    com.android.future.usb.accessory \
+    LegacyCamera \
+    HwaSettings
 
 # Init
 PRODUCT_COPY_FILES += \
@@ -142,7 +74,13 @@ PRODUCT_COPY_FILES += \
     vendor/htc/pico/proprietary/bin/lsc_camera:system/bin/lsc_camera \
     vendor/htc/pico/proprietary/bin/mm-qcamera-daemon:system/bin/mm-qcamera-daemon \
     device/htc/pico/prebuilt/etc/media_profiles.xml:system/etc/media_profiles.xml \
+    device/htc/pico/prebuilt/etc/media_codecs.xml:system/etc/media_codecs.xml \
     
+# Prebuilt libraries that are needed to build open-source libraries
+PRODUCT_COPY_FILES += \
+    device/htc/pico/prebuilt/lib/libv8.so:obj/lib/libv8.so \
+    device/htc/pico/prebuilt/lib/libqc-opt.so:obj/lib/libqc-opt.so
+
 # OMX
 PRODUCT_COPY_FILES += \
     vendor/htc/pico/proprietary/lib/libmm-adspsvc.so:system/lib/libmm-adspsvc.so \
@@ -159,13 +97,11 @@ ADDITIONAL_DEFAULT_PROPERTIES += \
     persist.sys.usb.config=mass_storage \
     persist.service.adb.enable=1
 
-$(call inherit-product, build/target/product/full.mk)
-DEVICE_PACKAGE_OVERLAYS += device/htc/pico/overlay
-
 # Publish that we support the live wallpaper feature.
 PRODUCT_COPY_FILES += \
     packages/wallpapers/LivePicker/android.software.live_wallpaper.xml:/system/etc/permissions/android.software.live_wallpaper.xml 
-    PRODUCT_PACKAGES += \
+    
+PRODUCT_PACKAGES += \
     LiveWallpapers \
     LiveWallpapersPicker \
     VisualizationWallpapers \
@@ -179,16 +115,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     device/htc/pico/files/etc/vold.fstab:system/etc/vold.fstab 
 
-# Prebuilt Binaries
-# Don't work on 4.0.4 because from 2.3.5! And we don't need this !
-
-# Prebuilt Modules
-PRODUCT_COPY_FILES += \
-    device/htc/pico/prebuilt/bcmdhd.ko:system/lib/modules/bcmdhd.ko \
-    device/htc/pico/prebuilt/kineto_gan.ko:system/lib/modules/kineto_gan.ko \
-    device/htc/pico/prebuilt/cifs.ko:system/lib/modules/cifs.ko \
-    device/htc/pico/prebuilt/tun.ko:system/lib/modules/tun.ko \
-
 # Wifi
 PRODUCT_COPY_FILES += \
     device/htc/pico/files/etc/wifi/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf \
@@ -198,7 +124,6 @@ PRODUCT_COPY_FILES += \
     device/htc/pico/prebuilt/etc/firmware/fw_bcm4330_p2p_b2.bin:system/etc/firmware/fw_bcm4330_p2p_b2.bin \
     
 # Audio
-# Need all audio filters
 PRODUCT_COPY_FILES += \
     device/htc/pico/prebuilt/etc/AudioFilter.csv:system/etc/AudioFilter.csv \
     device/htc/pico/prebuilt/etc/AudioBTID.csv:system/etc/AudioBTID.csv \
@@ -209,39 +134,47 @@ PRODUCT_COPY_FILES += \
     vendor/htc/pico/proprietary/lib/libaudioeq.so:system/lib/libaudioeq.so \
     vendor/htc/pico/proprietary/lib/libhtc_acoustic.so:system/lib/libhtc_acoustic.so \
     
-
-# Sensors
+# Liblights & Sensors
 PRODUCT_COPY_FILES += \
     vendor/htc/pico/proprietary/lib/hw/sensors.pico.so:system/lib/hw/sensors.pico.so \
-    
-# GPS
-# Don't work on 4.0.4 because from 2.3.5! You need to compile it with yourself
 
-# 3D(ICS Blobs)
+# 3D(Jellybean Blobs-Early Stage)
 PRODUCT_COPY_FILES += \
-    vendor/htc/pico/proprietary/etc/firmware/yamato_pfp.fw:system/etc/firmware/yamato_pfp.fw \
-    vendor/htc/pico/proprietary/etc/firmware/yamato_pm4.fw:system/etc/firmware/yamato_pm4.fw \
-    vendor/htc/pico/proprietary/lib/libgsl.so:system/lib/libgsl.so \
-    vendor/htc/pico/proprietary/lib/libOpenVG.so:system/lib/libOpenVG.so \
-    vendor/htc/pico/proprietary/lib/libsc-a2xx.so:system/lib/libsc-a2xx.so \
-    vendor/htc/pico/proprietary/lib/libC2D2.so:system/lib/libC2D2.so \
-    vendor/htc/pico/proprietary/lib/egl/eglsubAndroid.so:system/lib/egl/eglsubAndroid.so \
-    vendor/htc/pico/proprietary/lib/egl/libEGL_adreno200.so:system/lib/egl/libEGL_adreno200.so \
-    vendor/htc/pico/proprietary/lib/egl/libGLESv1_CM_adreno200.so:system/lib/egl/libGLESv1_CM_adreno200.so \
-    vendor/htc/pico/proprietary/lib/egl/libGLESv2_adreno200.so:system/lib/egl/libGLESv2_adreno200.so \
-    vendor/htc/pico/proprietary/lib/egl/libq3dtools_adreno200.so:system/lib/egl/libq3dtools_adreno200.so 
-    
+    device/htc/pico/prebuilt/etc/firmware/yamato_pfp.fw:system/etc/firmware/yamato_pfp.fw \
+    device/htc/pico/prebuilt/etc/firmware/yamato_pm4.fw:system/etc/firmware/yamato_pm4.fw \
+    device/htc/pico/prebuilt/etc/firmware/leia_pfp_470.fw:system/etc/firmware/leia_pfp_470.fw \
+    device/htc/pico/prebuilt/etc/firmware/leia_pm4_470.fw:system/etc/firmware/leia_pm4_470.fw \
+    device/htc/pico/prebuilt/lib/libC2D2.so:system/lib/libC2D2.so \
+    device/htc/pico/prebuilt/lib/libgsl.so:system/lib/libgsl.so \
+    device/htc/pico/prebuilt/lib/libc2d2_z180.so:system/lib/libc2d2_z180.so \
+    device/htc/pico/prebuilt/lib/libOpenVG.so:system/lib/libOpenVG.so \
+    device/htc/pico/prebuilt/lib/libsc-a2xx.so:system/lib/libsc-a2xx.so \
+    device/htc/pico/prebuilt/lib/egl/eglsubAndroid.so:system/lib/egl/eglsubAndroid.so \
+    device/htc/pico/prebuilt/lib/egl/libEGL_adreno200.so:system/lib/egl/libEGL_adreno200.so \
+    device/htc/pico/prebuilt/lib/egl/libGLESv1_CM_adreno200.so:system/lib/egl/libGLESv1_CM_adreno200.so \
+    device/htc/pico/prebuilt/lib/egl/libGLESv2_adreno200.so:system/lib/egl/libGLESv2_adreno200.so \
+    device/htc/pico/prebuilt/lib/egl/libGLESv2S3D_adreno200.so:system/lib/egl/libGLESv2S3D_adreno200.so \
+    device/htc/pico/prebuilt/lib/egl/libq3dtools_adreno200.so:system/lib/egl/libq3dtools_adreno200.so 
     
 # RIL
 PRODUCT_COPY_FILES += \
+    device/htc/pico/prebuilt/lib/libv8.so:system/lib/libv8.so \
     vendor/htc/pico/proprietary/lib/libhtc_ril.so:system/lib/libhtc_ril.so \
-    vendor/htc/pico/proprietary/lib/libqc-opt.so:system/lib/libqc-opt.so \
-    
-# Don't work on 4.0.4 because from 2.3.5! You need to compile it with yourself
-PRODUCT_COPY_FILES += \
-    vendor/htc/pico/proprietary/etc/gps.conf:system/etc \
-    vendor/htc/pico/proprietary/etc/spn-conf.xml:system/etc 
-
+    device/htc/pico/prebuilt/lib/libqc-opt.so:system/lib/libqc-opt.so \
+#    device/htc/pico/prebuilt/lib/libdnshostprio.so:system/lib/libdnshostprio.so \
+#    device/htc/pico/prebuilt/lib/libtcpfinaggr.so:system/lib/libtcpfinaggr.so \
+#    device/htc/pico/prebuilt/lib/pp_proc_plugin.so:system/lib/pp_proc_plugin.so \
+#    device/htc/pico/prebuilt/lib/qnet-plugin.so:system/lib/qnet-plugin.so \
+#    device/htc/pico/prebuilt/lib/tcp-connections.so:system/lib/tcp-connections.so \
+#    device/htc/pico/prebuilt/lib/libdiag.so:system/lib/libdiag.so \
+#    device/htc/pico/prebuilt/lib/libdsi_netctrl.so:system/lib/libdsi_netctrl.so \
+#    device/htc/pico/prebuilt/lib/libdsutils.so:system/lib/libdsutils.so \
+#    device/htc/pico/prebuilt/lib/libidl.so:system/lib/libidl.so \
+#    device/htc/pico/prebuilt/lib/libqdi.so:system/lib/libqdi.so \
+#    device/htc/pico/prebuilt/lib/libqdp.so:system/lib/libqdp.so \
+#    device/htc/pico/prebuilt/lib/libqmi.so:system/lib/libqmi.so \
+#    device/htc/pico/prebuilt/lib/libqmiservices.so:system/lib/libqmiservices.so \
+ 
 # Audio DSP Profiles
 PRODUCT_COPY_FILES += \
     device/htc/pico/prebuilt/etc/soundimage/srs_global.cfg:system/etc/soundimage/srs_global.cfg \
@@ -258,6 +191,7 @@ PRODUCT_COPY_FILES += \
 
 # Keylayouts
 PRODUCT_COPY_FILES += \
+    device/htc/pico/files/CHANGELOG-CM.txt:system/etc/CHANGELOG-CM.txt \
     device/htc/pico/prebuilt/usr/keychars/qwerty2.kcm.bin:system/usr/keychars/qwerty2.kcm.bin \
     device/htc/pico/prebuilt/usr/keychars/qwerty.kcm.bin:system/usr/keychars/qwerty.kcm.bin \
     device/htc/pico/prebuilt/usr/keychars/pico-keypad.kcm.bin:system/usr/keychars/pico-keypad.kcm.bin \
@@ -281,9 +215,14 @@ PRODUCT_PROPERTY_OVERRIDES += \
     dalvik.vm.lockprof.threshold=500 \
     dalvik.vm.dexopt-flags=m=y \
     ro.telephony.call_ring.multiple=false \
-    ro.vold.umsdirtyratio=20 \
-    persist.sys.themeId=MiniCM9 \
-    persist.sys.themePackageName=com.darkdog.theme.minicm9
-    
+    ro.vold.umsdirtyratio=40
+
+PRODUCT_NAME := cm_pico
+PRODUCT_BRAND := htc_europe
+PRODUCT_DEVICE := pico
+PRODUCT_MODEL := HTC Explorer A310e
+PRODUCT_MANUFACTURER := HTC
 PRODUCT_AAPT_CONFIG := normal mdpi
 PRODUCT_AAPT_PREF_CONFIG := mdpi
+PRODUCT_TAGS += dalvik.gc.type-precise
+PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0

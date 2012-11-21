@@ -19,21 +19,9 @@
     <!-- If false, MIN is displayed. If true, MSID is displayed. -->
     <bool name="config_msid_enable" translatable="false">false</bool>
 
-    <string name="additional_system_update" translatable="false">false</string>
-    <string name="additional_system_update_menu" translatable="false">false</string>
+    <!-- Whether or not the dock settings are to be displayed for this device when docked -->
+    <bool name="has_dock_settings">false</bool>
 
-    <!-- LED Flashlight -->
-    <bool name="has_led_flash">false</bool>
-
-    <!-- Undervolting module -->
-    <string name="undervolting_module"></string>
-
-    <!-- Ad-hoc network support. Some devices (unpatched bcmdhd) have broken
-         ad-hoc support and so we should hide ad-hoc network on those devices -->
-    <bool name="config_show_adhoc_network">true</bool>
-
-    <!-- Volume Rocker Wake Support. Some devices do not support (PMU) this.
-         Setting to false will disable Volume Rocker Wake support -->
-    <bool name="config_show_volumeRockerWake">true</bool>
+    <bool name="config_show_expandedDesktop">true</bool>
 
 </resources>

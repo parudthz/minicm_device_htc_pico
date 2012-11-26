@@ -115,7 +115,8 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     com.android.future.usb.accessory \
     LegacyCamera \
-    HwaSettings
+    HwaSettings \
+    Settings
 
 # Init
 PRODUCT_COPY_FILES += \

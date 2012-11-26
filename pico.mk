@@ -16,7 +16,8 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 
 # MiniCM10 theme
 PRODUCT_COPY_FILES += \
-    device/semc/msm7x27-common/prebuilt/MiniCM10.apk:system/app/MiniCM10.apk
+    device/htc/pico/prebuilt/media/bootanimation.zip:system/media/bootanimation.zip \
+    device/htc/pico/prebuilt/app/MiniCM10.apk:system/app/MiniCM10.apk
 
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.sys.themeId=MiniCM10 \
@@ -24,7 +25,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Extra packages
 PRODUCT_PACKAGES += \
-    FileManager \
     screencap \
     hostap \
     rzscontrol \
@@ -43,7 +43,7 @@ PRODUCT_COPY_FILES += \
 
 # for compcache
 PRODUCT_COPY_FILES += \
-        device/semc/msm7x27-common/prebuilt/rzscontrol:system/xbin/rzscontrol
+        device/htc/pico/prebuilt/xbin/rzscontrol:system/xbin/rzscontrol
 
 # Dalvik properties - read from AndroidRuntime
 # dexop-flags:
@@ -65,21 +65,18 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Extra prebuilt binaries
 PRODUCT_COPY_FILES += \
-    device/semc/msm7x27-common/prebuilt/remount:system/xbin/remount \
+    device/htc/pico/prebuilt/xbin/remount:system/xbin/remount \
 
 # A2SD and extra init files
 PRODUCT_COPY_FILES += \
-    device/semc/msm7x27-common/prebuilt/a2sd:system/bin/a2sd \
-    device/semc/msm7x27-common/prebuilt/00banner:system/etc/init.d/00banner \
-    device/semc/msm7x27-common/prebuilt/10apps2sd:system/etc/init.d/10apps2sd \
-    device/semc/msm7x27-common/prebuilt/05mountext:system/etc/init.d/05mountext \
-    device/semc/msm7x27-common/prebuilt/04modules:system/etc/init.d/04modules \
-    device/semc/msm7x27-common/prebuilt/06minicm:system/etc/init.d/06minicm \
-    device/semc/msm7x27-common/prebuilt/zipalign:system/xbin/zipalign
+    device/htc/pico/prebuilt/etc/init.d/00banner:system/etc/init.d/00banner \
+    device/htc/pico/prebuilt/etc/init.d/04modules:system/etc/init.d/04modules \
+    device/htc/pico/prebuilt/etc/init.d/06minicm:system/etc/init.d/06minicm \
+    device/htc/pico/prebuilt/xbin/zipalign:system/xbin/zipalign
 
 # Hciattach
 PRODUCT_COPY_FILES += \
-    device/semc/msm7x27-common/prebuilt/hciattach:system/bin/hciattach
+    device/htc/pico/prebuilt/bin/hciattach:system/bin/hciattach
 
 # Video decoding
 PRODUCT_PACKAGES += \
@@ -265,7 +262,6 @@ PRODUCT_COPY_FILES += \
 
 # Keylayouts
 PRODUCT_COPY_FILES += \
-    device/htc/pico/files/CHANGELOG-CM.txt:system/etc/CHANGELOG-CM.txt \
     device/htc/pico/prebuilt/usr/keychars/qwerty2.kcm.bin:system/usr/keychars/qwerty2.kcm.bin \
     device/htc/pico/prebuilt/usr/keychars/qwerty.kcm.bin:system/usr/keychars/qwerty.kcm.bin \
     device/htc/pico/prebuilt/usr/keychars/pico-keypad.kcm.bin:system/usr/keychars/pico-keypad.kcm.bin \

@@ -21,7 +21,7 @@
 
 # MiniCM9 visuals
 PRODUCT_COPY_FILES += \
-    device/semc/msm7x27-common/prebuilt/MiniCM9.apk:system/app/MiniCM9.apk \
+    device/htc/pico/prebuilt/app/MiniCM9.apk:system/app/MiniCM9.apk \
     device/htc/pico/prebuilt/media/bootanimation.zip:system/media/bootanimation.zip
 
 # Extra packages
@@ -29,7 +29,9 @@ PRODUCT_PACKAGES += \
     FileManager \
     screencap \
     hostap \
-    rzscontrol 
+    rzscontrol \
+    CMUpdateNotify \
+    com.android.future.usb.accessory
 
 # for bugmailer
 PRODUCT_PACKAGES += send_bug
@@ -52,13 +54,15 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.config.notification_sound=CyanPing.ogg \
     ro.config.alarm_alert=CyanAlarm.ogg
 
-# D2EXT and extra init files
+# Extra prebuilt and init files
 PRODUCT_COPY_FILES += \
     device/htc/pico/prebuilt/etc/init.d/00banner:system/etc/init.d/00banner \
     device/htc/pico/prebuilt/etc/init.d/04modules:system/etc/init.d/04modules \
-    device/htc/pico/prebuilt/etc/init.d/05swap:system/etc/init.d/05swap \
-    device/htc/pico/prebuilt/etc/init.d/06minicm:system/etc/init.d/06minicm \
     device/htc/pico/prebuilt/xbin/zipalign:system/xbin/zipalign
+
+# Hciattach
+PRODUCT_COPY_FILES += \
+    device/htc/pico/prebuilt/bin/hciattach:system/bin/hciattach
 
 # Extra Cyanogen vendor files
 PRODUCT_COPY_FILES += \

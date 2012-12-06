@@ -61,7 +61,8 @@ on boot
     write /sys/devices/system/cpu/cpufreq/ondemand/sampling_rate 40000
     
     # hwui settings
-    mkdir /data/local/hwui.deny
+    mkdir -p /data/local/hwui.deny
+    chown system.system /data/local/hwui.deny
     chmod 0777 /data/local/hwui.deny
 
     # for CM performance
@@ -72,7 +73,12 @@ on boot
     # Enable low memory killer to check file pages
     write /sys/module/lowmemorykiller/parameters/minfile 0,0,0,5120,5632,6144
     write /sys/module/lowmemorykiller/parameters/check_filepages 1
-    
+
+    # Configure and enable KSM
+    write /sys/kernel/mm/ksm/pages_to_scan 600
+    write /sys/kernel/mm/ksm/sleep_millisecs 3000
+    write /sys/kernel/mm/ksm/run 1
+
     #usb tethering
     chmod 0777 /sys/class/usb_composite/*
 
@@ -165,5 +171,10 @@ service bugreport /system/bin/dumpstate -d -v -o /sdcard/bugreports/bugreport
     disabled
     oneshot
     keycodes 115 272
+
+# Adjust socket buffer to enlarge TCP receive window for high bandwidth
+# but only if ro.data.large_tcp_window_size property is set.
+on property:ro.data.large_tcp_window_size=true
+    write /proc/sys/net/ipv4/tcp_adv_win_scale  1
 
 service dspcrashd /system/bin/dspcrashd

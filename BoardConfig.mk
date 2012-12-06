@@ -17,7 +17,7 @@ USE_CAMERA_STUB := true
 
 TARGET_GLOBAL_CFLAGS   += -mfpu=neon -mfloat-abi=softfp
 TARGET_GLOBAL_CPPFLAGS += -mfpu=neon -mfloat-abi=softfp
-COMMON_GLOBAL_CFLAGS   += -DQCOM_HARDWARE -DREFRESH_RATE=65 -DQCOM_NO_SECURE_PLAYBACK
+COMMON_GLOBAL_CFLAGS   += -DQCOM_HARDWARE -DREFRESH_RATE=65 -DQCOM_NO_SECURE_PLAYBACK -DQCOM_ICS_DECODERS
 
 # Arch related defines
 TARGET_BOARD_PLATFORM := msm7x27a
@@ -33,7 +33,7 @@ TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
 ARCH_ARM_HAVE_TLS_REGISTER := true
 TARGET_BOOTLOADER_BOARD_NAME := pico
-BOARD_NO_SPEAKER := true # msm7627a doesn't have speaker
+BOARD_NO_SPEAKER := true # msm7x27a doesn't have speaker
 TARGET_CORTEX_CACHE_LINE_32 := true
 
 # Kernel
@@ -50,8 +50,8 @@ TARGET_PROVIDES_LIBLIGHTS := true
 
 # Fix this up by examining /proc/mtd on a running device
 BOARD_BOOTIMAGE_PARTITION_SIZE := 0x00400000
-BOARD_RECOVERYIMAGE_PARTITION_SIZE := 0x00600000  #kernel don't fit anymore in recovery!
-BOARD_SYSTEMIMAGE_PARTITION_SIZE := 0x0eb40000
+BOARD_RECOVERYIMAGE_PARTITION_SIZE := 0x00600000  #kernel doesn't fit anymore in recovery!
+BOARD_SYSTEMIMAGE_PARTITION_SIZE := 524288000     #system doesnt fit anymore in /system!  -->0x0eb40000
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 0x09600000
 BOARD_FLASH_BLOCK_SIZE := 262144
 
@@ -73,6 +73,7 @@ BOARD_UMS_LUNFILE := "/sys/devices/platform/usb_mass_storage/lun0/file"
 # Bluetooth
 BOARD_HAVE_BLUETOOTH := true
 BOARD_HAVE_BLUETOOTH_BCM := true
+TARGET_NEEDS_BLUETOOTH_INIT_DELAY := true
 
 TARGET_SPECIFIC_HEADER_PATH := device/htc/pico/include
 
@@ -81,7 +82,6 @@ BOARD_EGL_CFG := vendor/htc/pico/proprietary/lib/egl/egl.cfg
 BOARD_USES_QCOM_HARDWARE := true
 BOARD_USES_QCOM_LIBRPC := true
 BOARD_USES_QCOM_LIBS := true
-TARGET_GRALLOC_USES_ASHMEM := true
 
 # Wifi related defines
 BOARD_WPA_SUPPLICANT_DRIVER      := NL80211
@@ -98,6 +98,7 @@ WIFI_DRIVER_FW_PATH_P2P          := "/system/etc/firmware/fw_bcm4330_p2p_b2.bin"
 WIFI_DRIVER_MODULE_NAME          := "bcmdhd"
 WIFI_DRIVER_MODULE_ARG           := "firmware_path=/system/etc/firmware/fw_bcm4330_b2.bin nvram_path=/proc/calibration iface_name=eth0"
 WIFI_BAND                        := 802_11_ABG
+BOARD_LEGACY_NL80211_STA_EVENTS  := true
 
 # Releasetools
 TARGET_RELEASETOOLS_EXTENSIONS := device/htc/pico/releasetools
@@ -114,6 +115,7 @@ TARGET_BOOTANIMATION_TEXTURE_CACHE := true
 TARGET_BOOTANIMATION_USE_RGB565 := true
 
 # Graphics
+TARGET_GRALLOC_USES_ASHMEM := true
 BOARD_USE_SKIA_LCDTEXT := true
 TARGET_USES_GENLOCK := true
 USE_OPENGL_RENDERER := true

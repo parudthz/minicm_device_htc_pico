@@ -32,6 +32,7 @@ ARCH_ARM_HAVE_TLS_REGISTER := true
 TARGET_BOOTLOADER_BOARD_NAME := pico
 BOARD_NO_SPEAKER := true # msm7627a doesn't have speaker
 TARGET_CORTEX_CACHE_LINE_32 := true
+TARGET_USE_KRAIT_BIONIC_OPTIMIZATION := false
 
 # Kernel
 BOARD_KERNEL_CMDLINE := no_console_suspend=1 console=null
